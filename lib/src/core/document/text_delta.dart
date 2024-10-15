@@ -521,7 +521,12 @@ class Delta extends Iterable<TextOperation> {
       return null;
     }
 
-    final attributes = slice(index - 1, index).first.attributes;
+    final sliced = slice(index - 1, index);
+    if (sliced.isEmpty) {
+      return null;
+    }
+
+    final attributes = sliced.first.attributes;
     if (attributes == null ||
         !attributes.keys.every(
           (element) => AppFlowyRichTextKeys.supportSliced.contains(element),
